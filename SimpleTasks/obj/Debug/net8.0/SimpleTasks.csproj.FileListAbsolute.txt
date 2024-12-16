@@ -1,0 +1,15 @@
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/bin/Debug/net8.0/SimpleTasks
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/bin/Debug/net8.0/SimpleTasks.deps.json
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/bin/Debug/net8.0/SimpleTasks.runtimeconfig.json
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/bin/Debug/net8.0/SimpleTasks.dll
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/bin/Debug/net8.0/SimpleTasks.pdb
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.AssemblyInfoInputs.cache
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.AssemblyInfo.cs
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.csproj.CoreCompileInputs.cache
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.sourcelink.json
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.dll
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/refint/SimpleTasks.dll
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.pdb
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/SimpleTasks.genruntimeconfig.cache
+/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/obj/Debug/net8.0/ref/SimpleTasks.dll
