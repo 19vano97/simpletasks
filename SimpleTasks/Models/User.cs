@@ -73,7 +73,9 @@ public class User
     public void ReturnBook(ref Book book)
     {
         int bookId = book.Id;
-        _borrowedBooks.RemoveAll(b => b.Id == bookId);
+        //_borrowedBooks.RemoveAll(b => b.Id == bookId);
+        var bookItem = _borrowedBooks.Where(b => b.Id == bookId).FirstOrDefault();
+        _borrowedBooks.Remove(bookItem!);
         book.IsAvailable = true;
     }
 }

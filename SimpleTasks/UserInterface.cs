@@ -5,13 +5,6 @@ public class UserInterface
 {
     public const int DELAY = 500;
 
-    private IDataStore _data;
-
-    public UserInterface(IDataStore data)
-    {
-        _data = data;
-    }
-
     public void GetMainMenu(MainMenu menu)
     {
         int menuSelect = 0;
@@ -78,27 +71,31 @@ public class UserInterface
         } while (isRunning);
     }
 
-    private void AddNewBook()
-    {
-        _data.books.Add(new Book(EnterString("title"), EnterString("author")));
-    }
+    //private Book AddNewBook()
+    //{
+    //    string title = EnterString("title");
+    //    string author = EnterString("author");
+    //    _data.books.Add(new Book(title, author));
 
-    private void AddNewUser()
-    {
-        _data.users.Add(new User(EnterString("name")));
-    }
+    //    return _data.books.Where(b => b.)
+    //}
 
-    private void ShowAllBooks()
+    //private void AddNewUser()
+    //{
+    //    _data.users.Add(new User(EnterString("name")));
+    //}
+
+    private void ShowAllBooks(IDataStore data)
     {
-        foreach (var book in _data.books)
+        foreach (var book in data.books)
         {
             System.Console.WriteLine(book.GetDetails());
         }
     }
 
-    private void ShowAllUsers()
+    private void ShowAllUsers(IDataStore data)
     {
-        foreach (var user in _data.users)
+        foreach (var user in data.users)
         {
             System.Console.WriteLine(user.Name);
 
@@ -109,27 +106,27 @@ public class UserInterface
         }
     }
 
-    private void BorrowBook()
-    {
-        int userId = GetIdFromList(GetUsersToString(), _data.users);
-        int bookToFind = GetIdFromList(GetBooksDetailsToString(_data.books), _data.books);
+    //private void BorrowBook()
+    //{
+    //    int userId = GetIdFromList(GetUsersToString(), _data.users);
+    //    int bookToFind = GetIdFromList(GetBooksDetailsToString(_data.books), _data.books);
         
-        Book bookToBorrow = _data.books.Where(b => b.Id == bookToFind).FirstOrDefault();
+    //    Book bookToBorrow = _data.books.Where(b => b.Id == bookToFind).FirstOrDefault();
 
-        if (!_data.users.Where(u => u.Id == userId).FirstOrDefault().BorrowBook(ref bookToBorrow))
-            Console.WriteLine("The book is not valid");
-    }
+    //    if (!_data.users.Where(u => u.Id == userId).FirstOrDefault().BorrowBook(ref bookToBorrow))
+    //        Console.WriteLine("The book is not valid");
+    //}
 
-    private void ReturnBook()
-    {
-        User user = _data.users.Where(u => u.Id == GetIdFromList(GetUsersToString(), _data.users)).FirstOrDefault();
-        int bookToFind = GetIdFromList(GetBooksDetailsToString(user.BorrowedBooks), user.BorrowedBooks);
-        Book bookToReturn = _data.books.Where(b => b.Id == bookToFind).FirstOrDefault();
+    //private void ReturnBook()
+    //{
+    //    User user = _data.users.Where(u => u.Id == GetIdFromList(GetUsersToString(), _data.users)).FirstOrDefault();
+    //    int bookToFind = GetIdFromList(GetBooksDetailsToString(user.BorrowedBooks), user.BorrowedBooks);
+    //    Book bookToReturn = _data.books.Where(b => b.Id == bookToFind).FirstOrDefault();
 
-        _data.users.Where(u => u.Id == user.Id).FirstOrDefault().ReturnBook(ref bookToReturn);
-    }
+    //    _data.users.Where(u => u.Id == user.Id).FirstOrDefault().ReturnBook(ref bookToReturn);
+    //}
 
-    private int GetIdFromList<T>(string[] booksToString, List<T> lists)
+    public int GetIndexFromList(string[] booksToString)
     {
         int menuSelect = 0;
         bool isRunning = true;
@@ -161,16 +158,7 @@ public class UserInterface
                 switch (menuSelect)
                 {
                     case var value when value == menuSelect:
-                        if (typeof(T) == typeof(Book))
-                        {
-                            id = (lists as List<Book>).Where(b => b.Id == int.Parse(booksToString[menuSelect].Split(',')[0]))
-                                              .Select(b => b.Id).FirstOrDefault();
-                        }
-                        else if (typeof(T) == typeof(User))
-                        {
-                            id = (lists as List<User>).Where(u => u.Id == int.Parse(booksToString[menuSelect].Split(',')[0]))
-                                              .Select(u => u.Id).FirstOrDefault();
-                        }
+                        id = menuSelect;
                         isRunning = false;
                         break;
                 }
@@ -180,41 +168,41 @@ public class UserInterface
         return id;
     }
 
-    private string EnterString(string message)
+    public string EnterString(string message)
     {
         System.Console.WriteLine($"Enter {message}: ");
         return Console.ReadLine();
     }
 
-    private int EnterInt(string message)
+    public int EnterInt(string message)
     {
         System.Console.WriteLine($"Enter {message}: ");
         return int.Parse(Console.ReadLine());
     }
 
-    private string[] GetBooksDetailsToString(List<Book> books)
-    {
-        string[] booksToString = new string[0];
+    //private string[] GetBooksDetailsToString(List<Book> books)
+    //{
+    //    string[] booksToString = new string[0];
 
-        foreach (var book in books)
-        {
-            Array.Resize(ref booksToString, booksToString.Length + 1);
-            booksToString[booksToString.Length - 1] = book.GetDetails();
-        }
+    //    foreach (var book in books)
+    //    {
+    //        Array.Resize(ref booksToString, booksToString.Length + 1);
+    //        booksToString[booksToString.Length - 1] = book.GetDetails();
+    //    }
 
-        return booksToString;
-    }
+    //    return booksToString;
+    //}
 
-    private string[] GetUsersToString()
-    {
-        string[] booksToString = new string[0];
+    //private string[] GetUsersToString()
+    //{
+    //    string[] booksToString = new string[0];
 
-        foreach (var user in _data.users)
-        {
-            Array.Resize(ref booksToString, booksToString.Length + 1);
-            booksToString[booksToString.Length - 1] = string.Format($"{user.Id},{user.Name}\t");
-        }
+    //    foreach (var user in _data.users)
+    //    {
+    //        Array.Resize(ref booksToString, booksToString.Length + 1);
+    //        booksToString[booksToString.Length - 1] = string.Format($"{user.Id},{user.Name}\t");
+    //    }
 
-        return booksToString;
-    }
+    //    return booksToString;
+    //}
 }

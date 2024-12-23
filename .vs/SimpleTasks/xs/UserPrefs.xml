@@ -1,33 +1,32 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{69A7F47F-A8CA-4D22-AB2A-A97A9287BD76}|Default">
+﻿<Properties StartupConfiguration="{69A7F47F-A8CA-4D22-AB2A-A97A9287BD76}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.SimpleTasks PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleTasks/UserInterface.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleTasks/DataStore.cs">
     <Files>
-      <File FileName="SimpleTasks/UserInterface.cs" Line="117" Column="24" />
-      <File FileName="SimpleTasks/User.cs" />
-      <File FileName="SimpleTasks/MenuEnumeration.cs" />
-      <File FileName="SimpleTasks/MainMenu.cs" />
-      <File FileName="SimpleTasks/Program.cs" />
-      <File FileName="SimpleTasks/DataStore.cs" />
+      <File FileName="SimpleTasks/UserInterface.cs" Line="109" Column="12" />
+      <File FileName="SimpleTasks/MainMenu.cs" Line="1" Column="1" />
+      <File FileName="SimpleTasks/Program.cs" Line="1" Column="1" />
+      <File FileName="SimpleTasks/DataStore.cs" Line="1" Column="1" />
       <File FileName="SimpleTasks/IDatastore.cs" />
+      <File FileName="SimpleTasks/Book.cs" Line="42" Column="6" />
+      <File FileName="SimpleTasks/ApplicationController.cs" Line="22" Column="9" />
+      <File FileName="SimpleTasks/User.cs" Line="78" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="SimpleTasks">
-            <Node name="SimpleTasks" expanded="True">
-              <Node name="UserInterface.cs" selected="True" />
+          <Node name="SimpleTasks" expanded="True">
+            <Node name="SimpleTasks">
+              <Node name="DataStore.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/ivanhontar/Work/cSharpAndNet/simpletasks/SimpleTasks/User.cs" relfile="SimpleTasks/User.cs" line="76" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.SimpleTasks PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
