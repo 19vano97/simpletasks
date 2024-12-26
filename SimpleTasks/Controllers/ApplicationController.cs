@@ -10,11 +10,11 @@ namespace SimpleTasks
 		private IDataStore _data = new DataStore();
         private UserInterface _ui = new UserInterface();
         private MainMenu _mainMenu = new MainMenu();
-        public event EventHandler<ShowMessageEventArgs> message;
+        private event EventHandler<ShowMessageEventArgs> _message;
 
         public void Run()
 		{
-            message += ApplicationController_Message;;
+            _message += ApplicationController_Message;;
             GetIndexFromList(_mainMenu.MenuStrings, MenuStatusEnumeration.MainMenu);
 		}
 
@@ -100,23 +100,21 @@ namespace SimpleTasks
 
         private User GetUserFromList()
         {
-            string[] usersData = _data.GetUsersToString();
-            int userPosition = GetIndexFromList(usersData, MenuStatusEnumeration.SelectWithClosing);
+            int userPosition = GetIndexFromList(_data.UsersToString, MenuStatusEnumeration.SelectWithClosing);
 
-            return _data.users.Where(u => u.Id == _data.GetIdFromArray(usersData, userPosition)).FirstOrDefault();
+            return _data.users.Where(u => u.Id == _data.GetIdFromArray(_data.UsersToString, userPosition)).FirstOrDefault();
         }
 
         private Book GetBookFromList()
         {
-            string[] booksData = _data.GetBooksDetailsToString();
-            int bookPostion = GetIndexFromList(booksData, MenuStatusEnumeration.SelectWithClosing);
+            int bookPostion = GetIndexFromList(_data.BooksToString, MenuStatusEnumeration.SelectWithClosing);
 
-            return _data.books.Where(b => b.Id == _data.GetIdFromArray(booksData, bookPostion)).FirstOrDefault();
+            return _data.books.Where(b => b.Id == _data.GetIdFromArray(_data.BooksToString, bookPostion)).FirstOrDefault();
         }
 
         protected virtual void SendMessage(object? sender, ShowMessageEventArgs e)
         {
-            message?.Invoke(sender, e);
+            _message?.Invoke(sender, e);
         }
     }
 }

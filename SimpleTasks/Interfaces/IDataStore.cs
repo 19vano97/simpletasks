@@ -9,8 +9,8 @@ namespace SimpleTasks
 		public bool AddNewUser(User user);
 		public bool BorrowBook(User user, Book bookToBorrow);
 		public bool ReturnBook(User user, Book bookToBeReturned);
-		public string[] GetBooksDetailsToString();
-		public string[] GetUsersToString();
+		public string[] BooksToString { get; }
+		public string[] UsersToString { get; }
 		public int GetIdFromArray(string[] data, int position);
     }
 }

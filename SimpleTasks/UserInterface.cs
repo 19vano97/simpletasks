@@ -9,24 +9,32 @@ public class UserInterface
 
     public Book AddNewBookUI()
     {
+        Console.Clear();
         return new Book(EnterString("title"), EnterString("author"));
     }
 
     public User AddNewUserUI()
     {
+        Console.Clear();
         return new User(EnterString("name"));
     }
 
     public void ShowAllBooks(List<Book> books)
     {
+        Console.Clear();
+
         foreach (var book in books)
         {
             System.Console.WriteLine(book.GetDetails());
         }
+
+        Thread.Sleep(DELAY);
     }
 
     public void ShowAllUsers(List<User> users)
     {
+        Console.Clear();
+
         foreach (var user in users)
         {
             System.Console.WriteLine(user.Name);
@@ -36,18 +44,14 @@ public class UserInterface
                 Console.WriteLine($"\t{book.GetDetails()}");
             }
         }
+
+        Thread.Sleep(DELAY);
     }
 
     public string EnterString(string message)
     {
         System.Console.WriteLine($"Enter {message}: ");
         return Console.ReadLine();
-    }
-
-    public int EnterInt(string message)
-    {
-        System.Console.WriteLine($"Enter {message}: ");
-        return int.Parse(Console.ReadLine());
     }
 
     public void ShowMessage(string message)
