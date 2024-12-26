@@ -1,83 +1,123 @@
 ﻿using System;
+using SimpleTasks.Delegates;
+using SimpleTasks.Enumerations;
+using SimpleTasks.EventHandlers;
+
 namespace SimpleTasks
 {
 	public class ApplicationController
 	{
 		private IDataStore _data = new DataStore();
         private UserInterface _ui = new UserInterface();
+        private MainMenu _mainMenu = new MainMenu();
+        public event EventHandler<ShowMessageEventArgs> message;
 
-		public void Run()
+        public void Run()
 		{
-
+            message += ApplicationController_Message;;
+            GetIndexFromList(_mainMenu.MenuStrings, MenuStatusEnumeration.MainMenu);
 		}
 
-        public Book AddNewBook()
+        private void ApplicationController_Message(object? sender, ShowMessageEventArgs e)
         {
-            string title = _ui.EnterString("title");
-            string author = _ui.EnterString("author");
-            _data.books.Add(new Book(title, author));
-
-            return _data.books.Where(b => b.Title == title && b.Author == author).First();
+            _ui.ShowMessage(e.Message);
         }
 
-        public void AddNewUser()
-        {
-            _data.users.Add(new User(_ui.EnterString("name")));
+        public bool GetCaseMenu(int menuSelect, MenuStatusEnumeration menuStatus)
+		{
+            if (menuStatus.HasFlag(MenuStatusEnumeration.MainMenu))
+                return GetCaseMainMenu(menuSelect);
+
+            return false;
         }
 
-        public void BorrowBook()
+        private bool GetCaseMainMenu(int menuSelect)
         {
-            string[] usersString = GetUsersToString();
-            string[] booksString = GetBooksDetailsToString(_data.books);
-            int userId = _data.users.Where(u => u.Id == int.Parse(usersString[_ui.GetIndexFromList(usersString)].Split(',')[0]))
-                                    .Select(u => u.Id).FirstOrDefault();
-            int bookToFind = _data.books.Where(b => b.Id == int.Parse(booksString[_ui.GetIndexFromList(booksString)].Split(',')[0]))
-                                        .Select(b => b.Id).FirstOrDefault();
+            bool isRunning = true;
 
-            Book bookToBorrow = _data.books.Where(b => b.Id == bookToFind).FirstOrDefault();
-
-            if (!_data.users.Where(u => u.Id == userId).FirstOrDefault().BorrowBook(ref bookToBorrow))
-                Console.WriteLine("The book is not valid");
-        }
-
-        public void ReturnBook()
-        {
-            User user = _data.users.Where(u => u.Id == _ui.GetIndexFromList(GetUsersToString(), _data.users)).FirstOrDefault();
-            int bookToFind = _ui.GetIndexFromList(GetBooksDetailsToString(user.BorrowedBooks), user.BorrowedBooks);
-            Book bookToReturn = _data.books.Where(b => b.Id == bookToFind).FirstOrDefault();
-
-            _data.users.Where(u => u.Id == user.Id).FirstOrDefault().ReturnBook(ref bookToReturn);
-        }
-
-        public string[] GetBooksDetailsToString(List<Book> books)
-        {
-            string[] booksToString = new string[0];
-
-            foreach (var book in books)
+            switch (menuSelect)
             {
-                Array.Resize(ref booksToString, booksToString.Length + 1);
-                booksToString[booksToString.Length - 1] = book.GetDetails();
+                case (int)MenuEnumeration.AddANewBook:
+                    var bookToAdd = _ui.AddNewBookUI();
+                    if (_data.AddNewBook(bookToAdd))
+                        SendMessage(this, new ShowMessageEventArgs("The book has been added"));
+                    break;
+                case (int)MenuEnumeration.AddANewUser:
+                    var userToAdd = _ui.AddNewUserUI();
+                    if (_data.AddNewUser(userToAdd))
+                        SendMessage(this, new ShowMessageEventArgs("The book has been added"));
+                    break;
+                case (int)MenuEnumeration.ListAllBooks:
+                    _ui.ShowAllBooks(_data.books);
+                    break;
+                case (int)MenuEnumeration.ListAllUsers:
+                    _ui.ShowAllUsers(_data.users);
+                    break;
+                case (int)MenuEnumeration.BorrowABook:
+                    if (_data.BorrowBook(GetUserFromList(), GetBookFromList()))
+                        SendMessage(this, new ShowMessageEventArgs("The book has been borrowed"));
+                    break;
+                case (int)MenuEnumeration.ReturnABook:
+                    if (_data.ReturnBook(GetUserFromList(), GetBookFromList()))
+                        SendMessage(this, new ShowMessageEventArgs("The book has been returned"));
+                    break;
+                case (int)MenuEnumeration.Exit: // exit
+                    isRunning = false;
+                    break;
             }
 
-            return booksToString;
+            return isRunning;
         }
 
-        public string[] GetUsersToString()
+        public int GetIndexFromList(string[] menuToString, MenuStatusEnumeration menuStatus)
         {
-            string[] booksToString = new string[0];
+            int menuSelect = 0;
 
-            foreach (var user in _data.users)
+            bool isRunning = true;
+
+            do
             {
-                Array.Resize(ref booksToString, booksToString.Length + 1);
-                booksToString[booksToString.Length - 1] = string.Format($"{user.Id},{user.Name}\t");
-            }
+                Console.Clear();
+                Console.CursorVisible = false;
 
-            return booksToString;
+                for (int i = 0; i < menuToString.Length; i++)
+                {
+                    Console.WriteLine((i == menuSelect ? "* " : "") + menuToString[i] + (i == menuSelect ? "\t<--" : ""));
+                }
+
+                var keyPressed = Console.ReadKey();
+
+                if (keyPressed.Key == ConsoleKey.DownArrow && menuSelect != menuToString.Length - 1)
+                    menuSelect++;
+                else if (keyPressed.Key == ConsoleKey.UpArrow && menuSelect >= 1)
+                    menuSelect--;
+                else if (keyPressed.Key == ConsoleKey.Enter)
+                    isRunning = GetCaseMenu(menuSelect, menuStatus);
+            } while (isRunning);
+
+            return menuSelect;
         }
 
+        private User GetUserFromList()
+        {
+            string[] usersData = _data.GetUsersToString();
+            int userPosition = GetIndexFromList(usersData, MenuStatusEnumeration.SelectWithClosing);
 
+            return _data.users.Where(u => u.Id == _data.GetIdFromArray(usersData, userPosition)).FirstOrDefault();
+        }
 
+        private Book GetBookFromList()
+        {
+            string[] booksData = _data.GetBooksDetailsToString();
+            int bookPostion = GetIndexFromList(booksData, MenuStatusEnumeration.SelectWithClosing);
 
+            return _data.books.Where(b => b.Id == _data.GetIdFromArray(booksData, bookPostion)).FirstOrDefault();
+        }
+
+        protected virtual void SendMessage(object? sender, ShowMessageEventArgs e)
+        {
+            message?.Invoke(sender, e);
+        }
     }
 }
 

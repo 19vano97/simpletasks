@@ -1,32 +1,37 @@
-﻿<Properties StartupConfiguration="{69A7F47F-A8CA-4D22-AB2A-A97A9287BD76}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.SimpleTasks PreferredExecutionTarget="MonoDevelop.Default" />
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{69A7F47F-A8CA-4D22-AB2A-A97A9287BD76}|Default">
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleTasks/DataStore.cs">
+  <MonoDevelop.Ide.ItemProperties.SimpleTasks PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleTasks/Controllers/ApplicationController.cs">
     <Files>
-      <File FileName="SimpleTasks/UserInterface.cs" Line="109" Column="12" />
-      <File FileName="SimpleTasks/MainMenu.cs" Line="1" Column="1" />
-      <File FileName="SimpleTasks/Program.cs" Line="1" Column="1" />
-      <File FileName="SimpleTasks/DataStore.cs" Line="1" Column="1" />
-      <File FileName="SimpleTasks/IDatastore.cs" />
-      <File FileName="SimpleTasks/Book.cs" Line="42" Column="6" />
-      <File FileName="SimpleTasks/ApplicationController.cs" Line="22" Column="9" />
-      <File FileName="SimpleTasks/User.cs" Line="78" Column="40" />
+      <File FileName="SimpleTasks/Models/DataStore.cs" Line="114" Column="9" />
+      <File FileName="SimpleTasks/Program.cs" />
+      <File FileName="SimpleTasks/Controllers/ApplicationController.cs" Line="97" Column="53" />
+      <File FileName="SimpleTasks/Models/MainMenu.cs" Line="9" Column="4" />
+      <File FileName="SimpleTasks/UserInterface.cs" Line="145" Column="8" />
+      <File FileName="SimpleTasks/IDataStore.cs" Line="14" Column="58" />
+      <File FileName="SimpleTasks/Delegates/MenuSelectorDelegate.cs" Line="6" Column="96" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SimpleTasks" expanded="True">
             <Node name="SimpleTasks">
-              <Node name="DataStore.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ApplicationController.cs" selected="True" />
+              </Node>
+              <Node name="Delegates" expanded="True" />
+              <Node name="Enumerations" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
