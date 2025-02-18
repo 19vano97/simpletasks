@@ -1,5 +1,6 @@
 ﻿using System;
 using SimpleTasks.Delegates;
+using SimpleTasks.Events;
 
 namespace SimpleTasks
 {
@@ -9,8 +10,8 @@ namespace SimpleTasks
         public List<User> users { get; }
         private string[] _booksString;
         private string[] _usersString;
-        private event UpdateStringArrayDeletage _updateStringsBooks;
-        private event UpdateStringArrayDeletage _updateStringsUsers;
+        private UpdateStringArrayDeletage _updateStringsBooks;
+        private UpdateStringArrayDeletage _updateStringsUsers;
 
         public DataStore()
         {
@@ -18,8 +19,10 @@ namespace SimpleTasks
             users = new List<User>();
             _booksString = new string[0];
             _usersString = new string[0];
-            _updateStringsBooks += DataStore_updateStringsBooks;
-            _updateStringsUsers += DataStore_updateStringsUsers;
+            var updateStringBooks = new UpdateStringArrayBooksHandler(this);
+            var updateStringUsers = new UpdateStringArrayUsersHandler(this);
+            updateStringBooks.Subscribe();
+            updateStringUsers.Subscribe();
         }
 
         public string[] BooksToString
@@ -30,6 +33,18 @@ namespace SimpleTasks
         public string[] UsersToString
         {
             get => _usersString;
+        }
+
+        public event UpdateStringArrayDeletage UpdateStringsBooks
+        {
+            add => _updateStringsBooks += value;
+            remove => _updateStringsBooks -= value;
+        }
+
+        public event UpdateStringArrayDeletage UpdateStringsUsers
+        {
+            add => _updateStringsUsers += value;
+            remove => _updateStringsUsers -= value;
         }
 
         public bool AddNewBook(Book book)
@@ -54,11 +69,11 @@ namespace SimpleTasks
                 (user, book) => users.Where(u => u.Id == user.Id).FirstOrDefault().ReturnBook(ref book));
         }
 
-        private string[] GetBooksDetailsToString()
+        public string[] GetBooksDetailsToString(List<Book> booksDetails)
         {
             string[] booksToString = new string[0];
 
-            foreach (var book in books)
+            foreach (var book in booksDetails)
             {
                 Array.Resize(ref booksToString, booksToString.Length + 1);
                 booksToString[booksToString.Length - 1] = book.GetDetails();
@@ -67,17 +82,17 @@ namespace SimpleTasks
             return booksToString;
         }
 
-        private string[] GetUsersToString()
+        public string[] GetUsersDetailsToString(List<User> userDetails)
         {
-            string[] booksToString = new string[0];
+            string[] usersToString = new string[0];
 
-            foreach (var user in users)
+            foreach (var user in userDetails)
             {
-                Array.Resize(ref booksToString, booksToString.Length + 1);
-                booksToString[booksToString.Length - 1] = string.Format($"{user.Id},{user.Name}\t");
+                Array.Resize(ref usersToString, usersToString.Length + 1);
+                usersToString[usersToString.Length - 1] = string.Format($"{user.Id},{user.Name}\t");
             }
 
-            return booksToString;
+            return usersToString;
         }
 
         public Book CheckBookInLibrary(Book book)
@@ -108,7 +123,8 @@ namespace SimpleTasks
                 return false;
             }
 
-            UpdateBooksStringsEvent(this);
+            OnUpdateStringBooks(this);
+            OnUpdateStringUsers(this);
 
             return true;
         }
@@ -118,11 +134,15 @@ namespace SimpleTasks
             try
             {
                 if (typeof(T) == typeof(Book))
+                {
                     books.Add(new Book(item as Book));
+                    OnUpdateStringBooks(this);
+                }
                 else if (typeof(T) == typeof(User))
+                {
                     users.Add(new User(item as User));
-
-                UpdateBooksStringsEvent(this);
+                    OnUpdateStringUsers(this);
+                }
             }
             catch (InvalidOperationException ex)
             {
@@ -138,20 +158,29 @@ namespace SimpleTasks
             return int.Parse(data[position].Split(',')[0]);
         }
 
-        protected virtual void UpdateBooksStringsEvent(object sender)
+        protected virtual void OnUpdateStringBooks(object sender)
         {
             _updateStringsBooks.Invoke(this);
+        }
+
+        protected virtual void OnUpdateStringUsers(object sender)
+        {
             _updateStringsUsers.Invoke(this);
         }
 
-        private void DataStore_updateStringsUsers(object sender)
+        public void UpdateStringUsers(object sender)
         {
-            _usersString = GetUsersToString();
+            _usersString = GetUsersDetailsToString(users);
         }
 
-        private void DataStore_updateStringsBooks(object sender)
+        public void UpdateStringBooks(object sender)
         {
-            _booksString = GetBooksDetailsToString();
+            _booksString = GetBooksDetailsToString(books);
+        }
+
+        public List<Book> GetAvailabeBooks()
+        {
+            return books.Where(b => b.IsAvailable == true).ToList<Book>();
         }
     }
 }

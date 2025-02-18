@@ -10,17 +10,42 @@
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Controllers\" />
-    <None Remove="Delegates\" />
     <None Remove="Enumerations\" />
     <None Remove="Interfaces\" />
-    <None Remove="EventHandlers\" />
+    <None Remove="Events\" />
+    <None Remove="Views\" />
+    <None Remove="Services\" />
+    <None Remove="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Delegates\" />
     <Folder Include="Enumerations\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="EventHandlers\" />
+    <Folder Include="Events\" />
+    <Folder Include="Views\" />
+    <Folder Include="Services\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Menu.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Menu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Menu.Designer.cs">
+      <DependentUpon>Menu.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Messages.Designer.cs">
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Westwind.Globalization" Version="3.1.8" />
   </ItemGroup>
 </Project>

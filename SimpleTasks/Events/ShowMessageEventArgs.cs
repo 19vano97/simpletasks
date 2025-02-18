@@ -11,7 +11,9 @@ namespace SimpleTasks.EventHandlers
 		}
 
 		public string Message
-		{ get => _message; }
+		{
+			get => _message;
+		}
 	}
 }
 

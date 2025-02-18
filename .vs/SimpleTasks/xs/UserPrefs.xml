@@ -1,37 +1,40 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{69A7F47F-A8CA-4D22-AB2A-A97A9287BD76}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.SimpleTasks PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleTasks/Controllers/ApplicationController.cs">
+﻿<Properties StartupConfiguration="{69A7F47F-A8CA-4D22-AB2A-A97A9287BD76}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleTasks/Enumerations/MenuEnumeration.cs">
     <Files>
-      <File FileName="SimpleTasks/Models/DataStore.cs" Line="114" Column="9" />
-      <File FileName="SimpleTasks/Program.cs" />
-      <File FileName="SimpleTasks/Controllers/ApplicationController.cs" Line="97" Column="53" />
-      <File FileName="SimpleTasks/Models/MainMenu.cs" Line="9" Column="4" />
-      <File FileName="SimpleTasks/UserInterface.cs" Line="145" Column="8" />
-      <File FileName="SimpleTasks/IDataStore.cs" Line="14" Column="58" />
-      <File FileName="SimpleTasks/Delegates/MenuSelectorDelegate.cs" Line="6" Column="96" />
+      <File FileName="SimpleTasks/Models/DataStore.cs" />
+      <File FileName="SimpleTasks/Interfaces/IDataStore.cs" Line="1" Column="1" />
+      <File FileName="SimpleTasks/Enumerations/MenuEnumeration.cs" Line="1" Column="1" />
+      <File FileName="SimpleTasks/Enumerations/MenuStatusEnumeration.cs" Line="9" Column="24" />
+      <File FileName="SimpleTasks/Resources/Menu.resx" Line="46" Column="14" />
+      <File FileName="SimpleTasks/Controllers/Application.cs" Line="163" Column="45" />
+      <File FileName="SimpleTasks/Models/MainMenu.cs" Line="36" Column="70" />
+      <File FileName="SimpleTasks/Events/MessageHandler.cs" Line="1" Column="1" />
+      <File FileName="SimpleTasks/Events/ShowMessageEventArgs.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SimpleTasks" expanded="True">
             <Node name="SimpleTasks">
-              <Node name="Controllers" expanded="True">
-                <Node name="ApplicationController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Enumerations" expanded="True">
+                <Node name="MenuEnumeration.cs" selected="True" />
               </Node>
-              <Node name="Delegates" expanded="True" />
-              <Node name="Enumerations" expanded="True" />
+              <Node name="Events" expanded="True" />
               <Node name="Interfaces" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Resources" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SimpleTasks PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

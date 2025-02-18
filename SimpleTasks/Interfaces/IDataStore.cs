@@ -1,4 +1,6 @@
 ﻿using System;
+using SimpleTasks.Delegates;
+
 namespace SimpleTasks
 {
 	public interface IDataStore
@@ -12,6 +14,13 @@ namespace SimpleTasks
 		public string[] BooksToString { get; }
 		public string[] UsersToString { get; }
 		public int GetIdFromArray(string[] data, int position);
+		public event UpdateStringArrayDeletage UpdateStringsBooks;
+		public event UpdateStringArrayDeletage UpdateStringsUsers;
+		public void UpdateStringUsers(object sender);
+		public void UpdateStringBooks(object sender);
+		public string[] GetBooksDetailsToString(List<Book> booksDetails);
+		public string[] GetUsersDetailsToString(List<User> userDetails);
+		public List<Book> GetAvailabeBooks();
     }
 }
 

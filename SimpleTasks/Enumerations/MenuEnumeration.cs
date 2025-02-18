@@ -9,8 +9,9 @@ namespace SimpleTasks
         ListAllBooks = 2, 
         ListAllUsers = 3, 
         BorrowABook = 4, 
-        ReturnABook = 5, 
-        Exit = 6
+        ReturnABook = 5,
+        Import = 6,
+        Exit = 7
 	}
 }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace SimpleTasks;
 
@@ -9,6 +10,7 @@ public class Book
     private string _author;
     private bool _isAvailable;
 
+    [JsonConstructor]
     public Book(string title, string author)
     {
         _id = new Random().Next(0, int.MaxValue);

@@ -1,51 +1,65 @@
 ﻿using System;
+using SimpleTasks.Enumerations;
+using SimpleTasks.Resources;
+
 namespace SimpleTasks
 {
 	public class MainMenu
 	{
-		private List<(MenuEnumeration, string)> _menu;
+		private List<(MenuEnumeration, string)> _mainMenu;
+        private List<(ImportMenuEnumeration, string)> _importMenu;
 
-		public MainMenu()
+        public MainMenu()
 		{
-			GenerateMenuFromEnum();
+			GenerateMainMenu();
+			GenerateImportMenu();
         }
 
-		private void GenerateMenuFromEnum()
+		private void GenerateMainMenu()
 		{
-			_menu = new List<(MenuEnumeration, string)>();
-			_menu.Add(new (MenuEnumeration.AddANewBook, "Add a new book"));
-            _menu.Add(new (MenuEnumeration.AddANewUser, "Add a new user"));
-            _menu.Add(new (MenuEnumeration.ListAllBooks, "List all books"));
-            _menu.Add(new (MenuEnumeration.ListAllUsers, "List all  users"));
-            _menu.Add(new (MenuEnumeration.BorrowABook, "Borrow a book"));
-            _menu.Add(new (MenuEnumeration.ReturnABook, "Return a Book"));
-            _menu.Add(new (MenuEnumeration.Exit, "Exit"));
+            _mainMenu = new List<(MenuEnumeration, string)>();
+            _mainMenu.Add(new (MenuEnumeration.AddANewBook, Menu.AddNewBook));
+            _mainMenu.Add(new (MenuEnumeration.AddANewUser, Menu.AddNewUser));
+            _mainMenu.Add(new (MenuEnumeration.ListAllBooks, Menu.ListAllAvailableBooks));
+            _mainMenu.Add(new (MenuEnumeration.ListAllUsers, Menu.ListAllUsers));
+            _mainMenu.Add(new (MenuEnumeration.BorrowABook, Menu.BorrowBook));
+            _mainMenu.Add(new (MenuEnumeration.ReturnABook, Menu.ReturnBook));
+            _mainMenu.Add(new(MenuEnumeration.Import, Menu.Import));
+            _mainMenu.Add(new (MenuEnumeration.Exit, Menu.Exit));
         }
 
-		public List<(MenuEnumeration, string)> Menu
+        private void GenerateImportMenu()
+        {
+            _importMenu = new List<(ImportMenuEnumeration, string)>();
+            _importMenu.Add(new(ImportMenuEnumeration.ImportBooksFromJSON, Menu.ImportBookJson));
+            _importMenu.Add(new(ImportMenuEnumeration.ImportBooksFromCSV, Menu.ImportBookCsv));
+            _importMenu.Add(new(ImportMenuEnumeration.Back, Menu.Back));
+        }
+
+        public List<(MenuEnumeration, string)> MainMenuList
 		{
-			get => _menu;
+			get => _mainMenu;
 		}
 
-		public string[] MenuStrings
+		public string[] MainMenuStrings
 		{
-			get => GetMenuStrings();
+			get => GetMenuStrings(_mainMenu);
 		}
 
-		public string GetCurrentPosition(int i)
-		{
-			return _menu.Where(m => (int)m.Item1 == i).Select(m => m.Item2).FirstOrDefault();
-		}
+        public string[] ImportMenuStrings
+        {
+            get => GetMenuStrings(_importMenu);
+        }
 
-		private string[] GetMenuStrings()
+		private string[] GetMenuStrings<T1, T2>(List<(T1, T2)> list)
 		{
-			string[] menu = new string[_menu.Count()];
+			string[] menu = new string[list.Count()];
 
 			int index = 0;
 
-			foreach (var item in _menu)
+			foreach (var item in list)
 			{
-				menu[index] = item.Item2;
+				menu[index] = item.Item2 as string;
 				index++;
 			}
 

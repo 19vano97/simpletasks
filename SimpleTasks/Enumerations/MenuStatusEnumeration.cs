@@ -5,7 +5,8 @@ namespace SimpleTasks.Enumerations
 	{
 		None = 0,
 		MainMenu = 1,
-		SelectWithClosing = 2
+		Import = 2,
+		SelectWithClosing = 3
 	}
 }
 
